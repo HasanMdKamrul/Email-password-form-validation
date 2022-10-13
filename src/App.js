@@ -1,44 +1,43 @@
-import { getAuth } from 'firebase/auth';
 import './App.css';
-import app from './firebase/firebase.init';
+import BootStrapRegister from './components/BootStrapRegister';
 
 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
 // ** 1st system
-const handleSubmit = (event)=>{
+// const handleSubmit = (event)=>{
  
-  event.preventDefault();
+//   event.preventDefault();
 
- const email = event.target.email.value;
- const password = event.target.password.value;
+//  const email = event.target.email.value;
+//  const password = event.target.password.value;
 
- console.log(email,password)
+//  console.log(email,password)
 
-}
+// }
 
-// ** 2nd system
+// // ** 2nd system
 
-const handleEmail = event=>{
-
-
-  console.log(event.target.value)
-
-}
-const handlePassword = event=>{
-  console.log(event.target.value)
-}
-
-const handleEmailOnBlur = event=>{
+// const handleEmail = event=>{
 
 
-  console.log(event.target.value)
+//   console.log(event.target.value)
 
-}
+// }
+// const handlePassword = event=>{
+//   console.log(event.target.value)
+// }
 
-const handlePasswordOnBlur = event=>{
-  console.log(event.target.value)
-}
+// const handleEmailOnBlur = event=>{
+
+
+//   console.log(event.target.value)
+
+// }
+
+// const handlePasswordOnBlur = event=>{
+//   console.log(event.target.value)
+// }
 
 
 
@@ -46,7 +45,8 @@ const handlePasswordOnBlur = event=>{
 function App() {
   return (
     <div className="App">
-      <br />
+      <BootStrapRegister/>
+      {/* <br />
      <form onSubmit={handleSubmit} >
       <input onBlur={handleEmailOnBlur} type="email" name="email" id="email" placeholder='Email' />
       <br />
@@ -55,7 +55,7 @@ function App() {
       <br />
       <br />
       <button type="submit">Register</button>
-     </form>
+     </form> */}
     </div>
   );
 }
