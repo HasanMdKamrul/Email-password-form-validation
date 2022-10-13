@@ -9,6 +9,7 @@ const auth = getAuth(app)
 function BootStrapRegister() {
 
   const [passwordError, setPasswordError] = useState("");
+  const [success,setSuccess] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -16,6 +17,8 @@ function BootStrapRegister() {
     const password = event.target.password.value;
     
     console.log(email,password);
+
+    setSuccess(false);
 
     if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
       setPasswordError('Please provide at least 2 uppercase letters');
@@ -38,8 +41,11 @@ function BootStrapRegister() {
     try {
       const result = await createUserWithEmailAndPassword(auth,email,password);
       console.log(result.user);
+      setSuccess(true);
+      event.target.reset();
     } catch (error) {
-      console.error('error:', error)
+      console.error('error:', error);
+      setPasswordError(error.message);
     };
    
    };
@@ -68,6 +74,9 @@ function BootStrapRegister() {
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
       <p>{passwordError}</p>
+      {
+        success && <p>User created successfully</p>
+      }
       <Button variant="primary" type="submit">
         Submit
       </Button>
