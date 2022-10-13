@@ -1,5 +1,5 @@
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React from "react";
 import { Link } from "react-router-dom";
 import app from "../firebase/firebase.init";
@@ -33,6 +33,21 @@ const BootstrapLogin = () => {
         
         signIn()
       
+    };
+
+    const logoutHandler = ()=>{
+     
+        const signoutInfo = async ()=>{
+           try {
+            await signOut(auth);
+            console.log("signout done")
+           } catch (error) {
+            console.log(error)
+           }
+        };
+
+        signoutInfo()
+        
     }
 
   return (
@@ -69,7 +84,9 @@ const BootstrapLogin = () => {
         </small>
         </p>
         <button className="btn btn-primary btn-lg" type="submit">Login</button>
+        
       </form>
+      <button onClick={logoutHandler} className="btn btn-primary btn-lg mt-2" type="button">Logout</button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -11,6 +11,13 @@ function BootStrapRegister() {
 
   const [passwordError, setPasswordError] = useState("");
   const [success,setSuccess] = useState(false);
+
+
+
+  const verifyEmail = async()=>{
+    await sendEmailVerification(auth.currentUser);
+  }
+
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -44,6 +51,9 @@ function BootStrapRegister() {
       console.log(result.user);
       setSuccess(true);
       event.target.reset();
+      // ** amar register successfull hole ami ekta verification mail pathabo
+      verifyEmail();
+
     } catch (error) {
       console.error('error:', error);
       setPasswordError(error.message);
