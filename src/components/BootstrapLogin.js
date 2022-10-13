@@ -1,12 +1,14 @@
 
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import React from "react";
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import app from "../firebase/firebase.init";
 
 const auth = getAuth(app)
 
 const BootstrapLogin = () => {
+
+    const [userEmail,setUserEmail] = useState('')
 
 
     const handleLogIn = event => {
@@ -48,6 +50,32 @@ const BootstrapLogin = () => {
 
         signoutInfo()
         
+    };
+
+    const forgotPass = ()=>{
+
+        const reset = async ()=>{
+           try {
+            if (!userEmail) {
+                alert('Please provide an email');
+                return;
+            }
+            await sendPasswordResetEmail(auth, userEmail);
+            alert('Reset credentials sent')
+           } catch (error) {
+            console.log(error)
+           }
+        };
+
+        reset()
+    };
+
+    const emailHandler = (event)=>{
+        
+        
+
+        const email = event.target.value;
+        setUserEmail(email);
     }
 
   return (
@@ -59,6 +87,7 @@ const BootstrapLogin = () => {
             Name
           </label>
           <input
+          onBlur={emailHandler}
             type="email"
             className="form-control"
             id="formGroupExampleInput"
@@ -87,6 +116,7 @@ const BootstrapLogin = () => {
         
       </form>
       <button onClick={logoutHandler} className="btn btn-primary btn-lg mt-2" type="button">Logout</button>
+      <button onClick={forgotPass} className="btn btn-primary btn-lg mt-2" type="button">ResetPass</button>
     </div>
   );
 };

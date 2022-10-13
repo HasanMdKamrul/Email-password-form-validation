@@ -15,7 +15,10 @@ function BootStrapRegister() {
 
 
   const verifyEmail = async()=>{
-    await sendEmailVerification(auth.currentUser);
+    const verified = await sendEmailVerification(auth.currentUser);
+    
+    return verified;
+
   }
 
 
@@ -52,7 +55,11 @@ function BootStrapRegister() {
       setSuccess(true);
       event.target.reset();
       // ** amar register successfull hole ami ekta verification mail pathabo
-      verifyEmail();
+      // verifyEmail();
+
+      verifyEmail() && alert('Ting')
+
+   
 
     } catch (error) {
       console.error('error:', error);
