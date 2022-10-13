@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import app from '../firebase/firebase.init';
 
 const auth = getAuth(app)
@@ -70,13 +71,16 @@ function BootStrapRegister() {
         <Form.Label>Password</Form.Label>
         <Form.Control name="password" type="password" placeholder="Password" required/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+      <small>Already have an account?   </small>
       <p>{passwordError}</p>
       {
         success && <p>User created successfully</p>
       }
+      <p>
+        <small>Don't have an account?
+            <Link to='/login'>Login</Link>
+        </small>
+        </p>
       <Button variant="primary" type="submit">
         Submit
       </Button>

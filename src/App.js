@@ -1,5 +1,8 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import BootstrapLogin from './components/BootstrapLogin';
 import BootStrapRegister from './components/BootStrapRegister';
+import Main from './layouts/Main';
 
 
 // const auth = getAuth(app);
@@ -39,13 +42,35 @@ import BootStrapRegister from './components/BootStrapRegister';
 //   console.log(event.target.value)
 // }
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element:<Main/>,
+    children:[
+      {
+        index: true,
+        element: <BootStrapRegister/>
+      },
+      {
+       path:'/register',
+        element: <BootStrapRegister/>
+      },
+      {
+       path:'/login',
+        element: <BootstrapLogin/>
+      },
+    ]
+  }
+])
+
 
 
 
 function App() {
   return (
     <div className="App">
-      <BootStrapRegister/>
+      <RouterProvider router={router}/>
+      
       {/* <br />
      <form onSubmit={handleSubmit} >
       <input onBlur={handleEmailOnBlur} type="email" name="email" id="email" placeholder='Email' />
